@@ -1,0 +1,38 @@
+servos metalicos KDS 90° de libertad
+servo de pinza chico plastico 180° lib
+PERO NO PASAR DE 90 GRADOS!! se rompe pinza
+
+posc inicial de reposo
+
+[200, 180, 201, 32, 202, 108, 203, 53, 204, 180, 205, 158, 206, 124, 207, 41, 208, 0]
+
+  ATMEGA88
+servo              NUMERO PIN  	 | REFERENCIA
+servo_0               11         |     Cadera1
+servo_1               12         |     Cadera2
+servo_2               13         |     Hombro
+servo_3               14         |     Codo
+servo_4               28         |     muñeca1
+servo_5               19         |     muñeca3
+servo_6               18         |     muñeca2
+servo_7               16         |     Pinza
+
+
+ATMEL ATMEGA8 & 88 & 168 / ARDUINO
+
+                 +-\/-+
+           PC6  1|    |28  PC5 (AI 5) o (D 19)
+     (D 0) PD0  2|    |27  PC4 (AI 4) o (D 18)
+     (D 1) PD1  3|    |26  PC3 (AI 3) o (D 17)
+     (D 2) PD2  4|    |25  PC2 (AI 2) o (D 16)
+PWM+ (D 3) PD3  5|    |24  PC1 (AI 1) o (D 15)
+     (D 4) PD4  6|    |23  PC0 (AI 0) o (D 14)
+           VCC  7|    |22  GND
+           GND  8|    |21  AREF
+           PB6  9|    |20  AVCC
+           PB7 10|    |19  PB5 (D 13)
+PWM+ (D 5) PD5 11|    |18  PB4 (D 12)
+PWM+ (D 6) PD6 12|    |17  PB3 (D 11) PWM
+     (D 7) PD7 13|    |16  PB2 (D 10) PWM
+     (D 8) PB0 14|    |15  PB1 (D 9) PWM
+                 +----+

@@ -1,0 +1,114 @@
+<robot name="test_robot">
+  <link name="base">
+    <visual>
+       <geometry>
+         <mesh filename="package://termi_impreso/urdf/links/base.stl" scale="1 1 1"/>
+       </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <material name="black">
+        <color rgba="0 0 0 1"/>
+      </material> 
+    </visual>
+  </link>
+  <link name="link1">
+    <visual>
+       <geometry>
+         <mesh filename="package://termi_impreso/urdf/links/link1.stl" scale="1 1 1" />
+        </geometry> 
+        <material name="blue">
+          <color rgba="0 0 0.8 1"/>
+        </material>
+    </visual>
+  </link>
+  <link name="link2">
+    <visual>
+       <geometry>
+         <mesh filename="package://termi_impreso/urdf/links/link2.stl" scale="1 1 1"/>
+       </geometry> 
+       <material name="white">
+         <color rgba="1 1 1 1"/>
+       </material>
+    </visual>
+  </link>
+  <link name="link3">
+    <visual>
+       <geometry>
+         <mesh filename="package://termi_impreso/urdf/links/link3.stl" scale="1 1 1"/>
+       </geometry> 
+       <material name="blue"/>
+    </visual>
+  </link>
+  <link name="link4">
+    <visual>
+       <geometry>
+         <mesh filename="package://termi_impreso/urdf/links/link4.stl" scale="1 1 1"/>
+       </geometry> 
+       <material name="white"/>
+    </visual>
+  </link>
+  <link name="link5">
+    <visual>
+       <geometry>
+         <mesh filename="package://termi_impreso/urdf/links/link5.stl" scale="1 1 1"/>
+       </geometry> 
+       <material name="blue"/>
+    </visual>
+  </link>
+  <link name="tool">
+    <visual>
+       <geometry>
+         <mesh filename="package://termi_impreso/urdf/links/tool.stl" scale="1 1 1"/>
+       </geometry> 
+       <material name="blue"/>
+    </visual>
+  </link>
+
+  <joint name="joint1" type="revolute">
+    <axis xyz="0 1 0"/>
+    <limit effort="1000.0" lower="-1.5708" upper="1.5708" velocity="0.5"/>
+    <parent link="base"/>
+    <child link="link1"/>
+    <origin xyz="0 0 0.0966" rpy="-1.5708 0 0" />
+  </joint>	
+
+  <joint name="joint2" type="revolute">
+    <axis xyz="0 0 1"/>
+    <limit effort="1000.0" lower="-1.5708" upper="1.5708" velocity="0.5"/>
+    <parent link="link1"/>
+    <child link="link2"/>
+    <origin xyz="0 0 0" rpy="0 0 1.5708" />
+  </joint>	
+
+  <joint name="joint3" type="revolute">
+    <axis xyz="0 1 0"/>
+    <limit effort="1000.0" lower="-0.548" upper="1.5708" velocity="0.5"/>
+    <parent link="link2"/>
+    <child link="link3"/>
+    <origin xyz="-0.1055 0 0" rpy="-1.5708 0 0" />
+  </joint>
+  
+  <joint name="joint4" type="revolute">
+    <axis xyz="0 1 0"/>
+    <limit effort="1000.0" lower="-0.7804" upper="0.7804" velocity="0.5"/>
+    <parent link="link3"/>
+    <child link="link4"/>
+    <origin xyz="0 0 -0.124" rpy="-1.5708 0 0" />
+  </joint>
+
+  <joint name="joint5" type="revolute">
+    <axis xyz="0 1 0"/>
+    <limit effort="1000.0" lower="-0.7804" upper="0.7804" velocity="0.5"/>
+    <parent link="link4"/>
+    <child link="link5"/>
+    <origin xyz="0 0 0" rpy="1.5708 0 0" />
+  </joint>
+
+  <joint name="joint6" type="revolute">
+    <axis xyz="0 0 1"/>
+    <parent link="link5"/>
+    <limit effort="1000.0" lower="-0.7804" upper="0.7804" velocity="0.5"/>
+    <child link="tool"/>
+    <origin xyz="0 0 -0.02088" rpy="0 0 0" />
+  </joint>
+
+</robot>

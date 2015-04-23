@@ -1,0 +1,8 @@
+digraph G {
+"base" -> "link1"[label="Broadcaster: /robot_state_publisher\nAverage rate: 50.203 Hz\nMost recent transform: 1405123192.943 \nBuffer length: 4.920 sec\n"];
+"link1" -> "link2"[label="Broadcaster: /robot_state_publisher\nAverage rate: 50.203 Hz\nMost recent transform: 1405123192.943 \nBuffer length: 4.920 sec\n"];
+"link2" -> "link3"[label="Broadcaster: /robot_state_publisher\nAverage rate: 50.203 Hz\nMost recent transform: 1405123192.943 \nBuffer length: 4.920 sec\n"];
+"link3" -> "link4"[label="Broadcaster: /robot_state_publisher\nAverage rate: 50.203 Hz\nMost recent transform: 1405123192.943 \nBuffer length: 4.920 sec\n"];
+"link4" -> "link5"[label="Broadcaster: /robot_state_publisher\nAverage rate: 50.203 Hz\nMost recent transform: 1405123192.943 \nBuffer length: 4.920 sec\n"];
+"link5" -> "tool"[label="Broadcaster: /robot_state_publisher\nAverage rate: 50.203 Hz\nMost recent transform: 1405123192.943 \nBuffer length: 4.920 sec\n"];
+}
