@@ -1,21 +1,60 @@
-servos metalicos KDS 90° de libertad
-servo de pinza chico plastico 180° lib
-PERO NO PASAR DE 90 GRADOS!! se rompe pinza
 
-posc inicial de reposo
+Actualizado 24/04/15 <carballeda.ignacio@gmail.com>
 
-[200, 180, 201, 32, 202, 108, 203, 53, 204, 180, 205, 158, 206, 124, 207, 41, 208, 0]
+RIBON PWM: (Señales PWM para controlar cada servo)
+NRO RIBON	|	PIN MICRO	|	DIGITAL ARDUINO
+1		|	14		|	D8
+2		|	15		|	D9	
+3		|	13		|	D7
+4		|	16		|	D10
+5		|	12		|	D6
+6		|	18		|	D12
+7		|	11		|	D5
+8		|	19		|	D13
+9		|	XX		|	XX
+10		|	XX		|	XX
 
-  ATMEGA88
-servo              NUMERO PIN  	 | REFERENCIA
-servo_0               11         |     Cadera1
-servo_1               12         |     Cadera2
-servo_2               13         |     Hombro
-servo_3               14         |     Codo
-servo_4               28         |     muñeca1
-servo_5               19         |     muñeca3
-servo_6               18         |     muñeca2
-servo_7               16         |     Pinza
+RIBON AD: (Conexiones a potenciometros de cada servo)
+NRO RIBON	|	PIN MICRO	|	AI ARDUINO
+1		|	23		|	A0
+2		|	24		|	A1
+3		|	XX		|	XX
+4		|	25		|	A2
+5		|	XX		|	XX
+6		|	26		|	A3
+7		|	XX		|	XX
+8		|	27		|	A4
+9		|	XX		|	XX
+10		|	28 		|	A5
+
+
+Contando desde abajo para arriba. Empezando por 1 en la base.
+Terminando con 8 en la pinza.
+
+A0 es AD servo 2  D9 es PWM
+A1 es AD servo 3  D7 es PWM 
+A2 es AD servo 4  D10 es PWM , ojo como esta no forzar a mas de 130, Hay que RE centrarlo.
+A3 es AD servo 5  D6 es PWM
+A4 es AD servo 6  D12 es PWM
+         servo 7  D5 es PWM
+         servo 8  D13 es PWM (pinza)
+
+Para arreglar en HARDWARE del brazo:
+Servo 7 no lee AD , A5 deberia estar conectado a el.
+Servo 1 no se puede comandar, D8 deberia estar conectado a el.
+LED de la placa no deberia encenderse.
+
+
+Servo Objects Atach (Tal cual esta en archivo old_sources/termi_servo_test):
+   
+servo_1.attach(8); 
+servo_2.attach(9);
+servo_3.attach(7);
+servo_4.attach(10);
+servo_5.attach(6);
+servo_6.attach(12);  
+servo_7.attach(5);
+servo_8.attach(13);
 
 
 ATMEL ATMEGA8 & 88 & 168 / ARDUINO
