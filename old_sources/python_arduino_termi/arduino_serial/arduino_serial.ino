@@ -1,5 +1,8 @@
 #include <Servo.h> 
+#include <String.h>
+#include<Stream.h>
 
+//instancio los objetos Servo
 Servo PWM_servo_1;
 Servo PWM_servo_2;
 Servo PWM_servo_3;
@@ -9,6 +12,7 @@ Servo PWM_servo_6;
 Servo PWM_servo_7;
 Servo PWM_servo_8;
 
+//conexiones de los servos
 const int AD_servo_1 = A5; //revisar, este es el que no funciona 
 const int AD_servo_2 = A0;
 const int AD_servo_3 = A1;
@@ -16,14 +20,16 @@ const int AD_servo_4 = A2;
 const int AD_servo_5 = A3;
 const int AD_servo_6 = A4;
 
-int AD_lecturas[8]={0,0,0,0,0,0,0,0}; //este vector contiene las lecturas de los ADs
+int ad_vector[8]={0,0,0,0,0,0,0,0}; //este vector contiene las lecturas de los ADs
+String ad_string; //string que se realiza a base del vector de lecturas AD
+String pwm_string;
 int posc[8]={0,0,0,0,0,0,0,0}; //este vector contiene la posicion a escribir en los servos.
 int i,j,p;
-char string[8];
+
 
 void setup() 
 { 
-	Serial.begin(9600); //inicio conexion serie
+	Serial.begin(115200); //inicio conexion serie
 	PWM_servo_1.attach(8);  //revisar esta conexion
         PWM_servo_2.attach(9);
         PWM_servo_3.attach(7);
@@ -39,18 +45,28 @@ void loop()
 {   
   leer_AD(); //actualiza vector AD_lecturas
   escribir_PWM(); //escribe el vector posc en los objetos servo.
- 	for(i=0;i<9;i++){
-		for(j=0;j<=90;j++){
-			posc[i]=j;
-			escribir_PWM();		
-			imprimir_serie();
-			delay(10);	
+ 	for(i=0;i<8;i++){
+		for(j=0;j<=180;j++){
+			//posc[i]=j;
+			//escribir_PWM();
+                        leer_AD();		
+			enviar_ad_string();
+                        //pwm_string=Serial.readStringUntil('>');
+                        //delay(5);
+                        //Serial.println(pwm_string);
+                        delay(10);	
+                        
 		}
-		for(j=90;j>0;j--){
-			posc[i]=j;
-			escribir_PWM();		
-			imprimir_serie();
-			delay(10);	
+		for(j=180;j>=0;j--){
+			//posc[i]=j;
+			//escribir_PWM();	
+                        leer_AD();	
+			enviar_ad_string();
+                        //enviar_ad_string();
+                        //pwm_string=Serial.readStringUntil('>');
+                        //delay(5);
+                        //Serial.println(pwm_string);
+                        delay(10);	
 		}	
        }
 }
@@ -67,18 +83,22 @@ void escribir_PWM(){
 }
 
 void leer_AD(){
-  AD_lecturas[0] = analogRead(AD_servo_1);
-  AD_lecturas[1] = analogRead(AD_servo_2);
-  AD_lecturas[2] = analogRead(AD_servo_3);
-  AD_lecturas[3] = analogRead(AD_servo_4);
-  AD_lecturas[4] = analogRead(AD_servo_5);
-  AD_lecturas[5] = analogRead(AD_servo_6);
+  ad_vector[0] = analogRead(AD_servo_1);
+  ad_vector[1] = analogRead(AD_servo_2);
+  ad_vector[2] = analogRead(AD_servo_3);
+  ad_vector[3] = analogRead(AD_servo_4);
+  ad_vector[4] = analogRead(AD_servo_5);
+  ad_vector[5] = analogRead(AD_servo_6);
 }
 
-void imprimir_serie(){
-  for(p=0;p<9;p++){
-    Serial.print(AD_lecturas[p]);
-    Serial.print(" ");  
-  }
-  Serial.print("\t");
+void enviar_ad_string(){
+    ad_string = String("<");
+    for(p=0;p<5;p++){
+    ad_string.concat(ad_vector[p]);
+    ad_string.concat(",");
+    }
+    ad_string.concat(ad_vector[5]);
+    ad_string.concat(">");
+    Serial.println(ad_string);
 }
+
