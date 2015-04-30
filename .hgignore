@@ -1,0 +1,6 @@
+.*\.stl$
+.*\.STL$
+.*\.scad$
+.*\.dxf$
+^build/.*$
+^models/.*$

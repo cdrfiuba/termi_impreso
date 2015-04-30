@@ -2,12 +2,11 @@
 
 import serial
 from serial import SerialException
-import time
 
-nombrePuerto = '/dev/ttyUSB0'
-velocidadSerial = 115200
-ad_string="<0,0,0,0,0,0>"   #string de lecturas AD que se reciben del arduino
-posc_string="<0,0,0,0,0,0,0,0>" #string de posiciones que se envia al arduino
+nombrePuerto = '/dev/ttyUSB1'
+velocidadSerial = 57600
+ad_string_r="<0,0,0,0,0,0>"		#string de lecturas AD que se reciben del arduino
+pwm_string_e="<0,0,0,0,0,0,0,0>"	#string de posiciones que se envia al arduino
 
 if __name__=='__main__':
 	arduino = serial.Serial()
@@ -16,20 +15,14 @@ if __name__=='__main__':
 
 	try:
 		arduino.open()
-		#print "Termi is armed at " + time.ctime()
-		#time.sleep(1)
 
 	except serial.SerialException:
 		print 'El puerto ya esta abierto o bien Termi desconectado.'
 		quit()
 
 	while True:
-		
-		ad_string= arduino.readline()
-		print ad_string
-		
-		#arduino.write(ad_string)
-		#loop = arduino.readline()
-		#print loop
+		arduino.write(pwm_string_e)
+		ad_string_r = arduino.readline() #le puse como argumento 30, o sea leer 30 bytes y tambien funciona ok
+		print ad_string_r
 
 
