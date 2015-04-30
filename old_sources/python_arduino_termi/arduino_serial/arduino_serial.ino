@@ -28,6 +28,7 @@ int i,j,p;
 void setup() 
 { 
 	Serial.begin(57600); //inicio conexion serie
+        Serial.setTimeout(120);
 	PWM_servo_1.attach(8);  //revisar esta conexion
         PWM_servo_2.attach(9);
         PWM_servo_3.attach(7);
@@ -76,12 +77,10 @@ void leer_AD(){
 }
 
 void concatenar_ad_string(){
-    ad_string = String("<");
+    ad_string = String();
     for(p=0;p<5;p++){
     ad_string.concat(ad_vector[p]);
     ad_string.concat(",");
     }
     ad_string.concat(ad_vector[5]);
-    ad_string.concat(">");
 }
-

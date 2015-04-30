@@ -1,12 +1,30 @@
 #!/usr/bin/env python
 
 import serial
+from numpy import interp
 from serial import SerialException
 
 nombrePuerto = '/dev/ttyUSB1'
 velocidadSerial = 57600
-ad_string_r="<0,0,0,0,0,0>"		#string de lecturas AD que se reciben del arduino
-pwm_string_e="<0,0,0,0,0,0,0,0>"	#string de posiciones que se envia al arduino
+ad_string_r="0,0,0,0,0,0"		#string de lecturas AD que se reciben del arduino
+pwm_string_e="0,0,0,0,0,0,0,0"	        #string de posiciones que se envia al arduino
+ad_vector=[0,0,0,0,0,0]
+
+def a_ddp(v):			#Traduce los valores de 0 a 1023 leidos por serie a valores de ddp [Volts]
+	for i in range(len(v)):	
+		v[i] = interp(int(v[i]),[1,1023],[0,5])
+		v[i]=round(v[i],3)
+	return v
+
+def a_int(v):
+	for i in range(len(v)):	
+		v[i]=int(v[i])
+	return v
+
+def parsear_string(ad_string):	 #Parte el string que se recibe desde puerto serie.
+	ad_vector=ad_string.split(',', len(ad_string))
+	return ad_vector
+		
 
 if __name__=='__main__':
 	arduino = serial.Serial()
@@ -21,8 +39,10 @@ if __name__=='__main__':
 		quit()
 
 	while True:
-		arduino.write(pwm_string_e)
-		ad_string_r = arduino.readline() #le puse como argumento 30, o sea leer 30 bytes y tambien funciona ok
-		print ad_string_r
-
-
+		arduino.write(pwm_string_e);
+		ad_string_r = arduino.readline(); #le puse como argumento 30, o sea leer 30 bytes y tambien funciona ok
+		ad_vector = parsear_string(ad_string_r)
+		ad_vector = a_ddp(ad_vector)		
+		print ad_vector
+		#print ad_string_r
+			
