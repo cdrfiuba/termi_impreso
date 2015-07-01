@@ -1,3 +1,0 @@
-Estuve probando muchas cosas, lo que mejor funciona es serie_vector (que usa strings , tanto como para enviar como para recibir),
-tengo un problema de velocidad, el programa es muy lento por alguna razón. Es decir, tarda en enviar/recibir strings.
-
